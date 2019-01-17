@@ -1,4 +1,5 @@
 from json import dumps
+from urllib.parse import unquote
 
 from flask import Response
 from flask import Blueprint, render_template
@@ -15,13 +16,29 @@ def hello():
 
 
 @routes.route("/grossPerGenre")
-def hi():
+def grossPerGenre():
     result = query_db(
         """
         SELECT genre, SUM("Domestic Gross"), SUM("Worldwide Gross")
         FROM movies
         GROUP BY genre
         """
+    )
+
+    return Response(dumps(result), mimetype="application/json")
+
+
+@routes.route("/genreGrossPerMonth/<path:genre>")
+def genreGrossPerMonth(genre):
+    query = """
+        SELECT strftime("%m", "Release Date"), SUM("Domestic Gross"),SUM("Worldwide Gross"),"genre"
+        FROM movies WHERE genre='{}'
+        GROUP BY strftime("%m","Release Date")
+    """
+    genre = unquote(genre)
+    print(genre)
+    result = query_db(
+        query.format(genre)
     )
 
     return Response(dumps(result), mimetype="application/json")
