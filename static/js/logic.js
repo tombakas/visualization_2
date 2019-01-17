@@ -1,5 +1,7 @@
 // Gross Per Genre
 $("#grossPerGenre").on("click", function() {
+  
+
   $.getJSON("/grossPerGenre", function( data ) {
     let sortedData = data.sort((a, b) => a[1] < b[1]);
 
@@ -19,11 +21,14 @@ $("#grossPerGenre").on("click", function() {
     bars.data(sortedData).append("span").text(d => d[0]);
     bars.data(sortedData).append("div")
       .classed("bar-style", true)
-      .style("width", d => (d[1] / maxWorldwide * 1000 + "px"));
 
     bars.data(sortedData).append("span")
       .classed("bar-value", true)
       .text(d => "$ " + numeral(d[1]).format("0,0"));
+
+    bars.selectAll("div.bar-style").transition()
+      .duration(500)
+      .style("width", d => (d[1] / maxWorldwide * 1000 + "px"));
 
   })
 });
