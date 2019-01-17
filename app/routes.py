@@ -23,6 +23,5 @@ def hi():
         GROUP BY genre
         """
     )
-    print(result)
 
     return Response(dumps(result), mimetype="application/json")
