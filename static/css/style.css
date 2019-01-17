@@ -30,8 +30,41 @@ body, html {
 
 .bar-style {
   background-color: #8facf3;
+  box-sizing: border-box;
+  display: inline-block;
+  height: 30px;
   padding: 2px;
-  color: #333;
+  color: white;
   font-weight: bold;
   margin: 2px;
+  text-align: right;
+}
+
+.bar-container .bar-value {
+  text-align: left;
+  width: auto;
+  padding-left: 10px;
+}
+
+.bar-container {
+  display: flex;
+  align-content: center;
+  flex-direction: row;
+  align-items: center;
+}
+
+.bar-container:hover {
+  font-weight: bold;
+}
+
+.bar-container:hover .bar-style{
+  font-weight: bold;
+  background-color: #82c3ce;
+  cursor: pointer;
+}
+
+.bar-container span {
+  width: 200px;
+  text-align: right;
+  padding-right: 10px;
 }
