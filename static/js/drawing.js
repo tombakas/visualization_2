@@ -43,7 +43,6 @@ function drawCalendarBars(data, sortColumn, attributes) {
 }
 
 function setUpBars(values, labels, max, attributes) {
-  console.log("pop");
   let bars = d3.select(".visualization")
     .selectAll("div")
     .data(labels)
