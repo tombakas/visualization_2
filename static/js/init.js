@@ -8,6 +8,7 @@ function run() {
       drawing.clear();
       drawing.drawBars(data, 1, true);
 
+      // Gross Per Genre Per Month
       $(".bar-container").on("click", function() {
         let genre = $(this).data("genre");
         let url = "/genreGrossPerMonth/" + encodeURIComponent(genre);
