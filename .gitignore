@@ -4,5 +4,5 @@ venv
 *swp
 __pycache__
 *css
-!scss
+!*scss
 .sass-cache
