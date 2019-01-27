@@ -32,13 +32,25 @@ def grossPerGenre():
 def genreGrossPerMonth(genre):
     query = """
         SELECT strftime("%m", "Release Date"), SUM("Domestic Gross"),SUM("Worldwide Gross"),"genre"
-        FROM movies WHERE genre='{}'
+        FROM movies WHERE genre="{}"
         GROUP BY strftime("%m","Release Date")
     """
     genre = unquote(genre)
-    print(genre)
     result = query_db(
         query.format(genre)
+    )
+
+    return Response(dumps(result), mimetype="application/json")
+
+
+@routes.route("/seperateFilmGrossPerMonth/<month>")
+def seperateFilmGrossPerMonth(month):
+    query = """
+        SELECT ("movie_title"), "Production Budget","Domestic Gross","Worldwide Gross"
+        FROM movies WHERE "Release Date" LIKE "%-{0:02d}-%"
+    """
+    result = query_db(
+        query.format(int(month))
     )
 
     return Response(dumps(result), mimetype="application/json")
