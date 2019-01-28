@@ -12,11 +12,21 @@ routes = Blueprint('routes', __name__,
 
 @routes.route("/")
 def hello():
-    return render_template("index.html")
+    return render_template("landing.html")
 
 
 @routes.route("/grossPerGenre")
 def grossPerGenre():
+    return render_template("gross_per_genre.html")
+
+
+@routes.route("/genreGrossPerMonth/<path:genre>")
+def genreGrossPerMonth(genre):
+    return render_template("genre_gross_per_month.html")
+
+
+@routes.route("/api/grossPerGenre")
+def APIgrossPerGenre():
     result = query_db(
         """
         SELECT genre, SUM("Domestic Gross"), SUM("Worldwide Gross")
@@ -28,8 +38,8 @@ def grossPerGenre():
     return Response(dumps(result), mimetype="application/json")
 
 
-@routes.route("/genreGrossPerMonth/<path:genre>")
-def genreGrossPerMonth(genre):
+@routes.route("/api/genreGrossPerMonth/<path:genre>")
+def APIgenreGrossPerMonth(genre):
     query = """
         SELECT strftime("%m", "Release Date"), SUM("Domestic Gross"),SUM("Worldwide Gross"),"genre"
         FROM movies WHERE genre="{}"
@@ -43,8 +53,8 @@ def genreGrossPerMonth(genre):
     return Response(dumps(result), mimetype="application/json")
 
 
-@routes.route("/seperateFilmGrossPerMonth/<month>")
-def seperateFilmGrossPerMonth(month):
+@routes.route("/api/seperateFilmGrossPerMonth/<month>")
+def APIseperateFilmGrossPerMonth(month):
     query = """
         SELECT ("movie_title"), "Production Budget","Domestic Gross","Worldwide Gross"
         FROM movies WHERE "Release Date" LIKE "%-{0:02d}-%"

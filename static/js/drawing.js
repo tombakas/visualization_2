@@ -17,7 +17,7 @@ function clear() {
   d3.select(".visualization").selectAll("div").remove();
 }
 
-function drawBars(data, sortColumn, attributes) {
+function drawBars(data, sortColumn, links) {
   // data strucure: | Genre | Domestic Gross | Worldwide Gross |
 
   let sortedData = data.sort((a, b) => a[sortColumn] < b[sortColumn]);
@@ -27,10 +27,10 @@ function drawBars(data, sortColumn, attributes) {
   let labels =  sortedData.map(x => x[0]);
   let values =  sortedData.map(x => x[1]);
 
-  setUpBars(values, labels, max, attributes);
+  setUpBars(values, labels, max, links);
 }
 
-function drawCalendarBars(data, sortColumn, attributes) {
+function drawCalendarBars(data, sortColumn, links) {
   // data strucure: | Release month | Domestic Gross | Worldwide Gross | Genre |
 
   let sortedData = data.sort((a, b) => a[sortColumn] < b[sortColumn]);
@@ -42,16 +42,25 @@ function drawCalendarBars(data, sortColumn, attributes) {
   setUpBars(values, labels, max);
 }
 
-function setUpBars(values, labels, max, attributes) {
-  let bars = d3.select(".visualization")
-    .selectAll("div")
-    .data(labels)
-    .enter()
-    .append("div")
-    .classed("bar-container", true);
+function setUpBars(values, labels, max, links) {
+  let bars;
 
-  if (attributes) {
-    bars.attr("data-genre", d => d);;
+  if (links) {
+    bars = d3.select(".visualization")
+      .selectAll("div")
+      .data(labels)
+      .enter()
+      .append("a")
+      .attr("href", labels => "/genreGrossPerMonth/" + encodeURIComponent(labels))
+      .append("div")
+      .classed("bar-container", true);
+  } else {
+    bars = d3.select(".visualization")
+      .selectAll("div")
+      .data(labels)
+      .enter()
+      .append("div")
+      .classed("bar-container", true);
   }
 
   bars.data(labels).append("span").text(labels => labels);
