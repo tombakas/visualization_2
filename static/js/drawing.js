@@ -17,7 +17,7 @@ function clear() {
   d3.select(".visualization").selectAll("div").remove();
 }
 
-function drawBars(data, sortColumn, links) {
+function drawBars(data, sortColumn, link) {
   // data strucure: | Genre | Domestic Gross | Worldwide Gross |
 
   let sortedData = data.sort((a, b) => a[sortColumn] < b[sortColumn]);
@@ -27,31 +27,43 @@ function drawBars(data, sortColumn, links) {
   let labels =  sortedData.map(x => x[0]);
   let values =  sortedData.map(x => x[1]);
 
-  setUpBars(values, labels, max, links);
+  setUpBars(values, labels, max, link);
 }
 
-function drawCalendarBars(data, sortColumn, links) {
-  // data strucure: | Release month | Domestic Gross | Worldwide Gross | Genre |
+function drawNarrowBars(data, sortColumn, link) {
+  // data strucure: | Genre | Domestic Gross | Worldwide Gross |
 
   let sortedData = data.sort((a, b) => a[sortColumn] < b[sortColumn]);
-  let max = getMax(data);
 
-  let labels = sortedData.map(x => months[Number(x[0])]);
-  let values = sortedData.map(x => x[1]);
+  let max = getMax(data, 2, 3);
 
-  setUpBars(values, labels, max);
+  let labels =  sortedData.map(x => x[0]);
+  let values =  sortedData.map(x => x[3]);
+
+  setUpNarrowBars(values, labels, max, link);
 }
 
-function setUpBars(values, labels, max, links) {
+function drawCalendarBars(data, link) {
+  // data strucure: | Release month | Domestic Gross | Worldwide Gross | Genre |
+
+  let max = getMax(data);
+
+  let labels = data.map(x => months[Number(x[0])]);
+  let values = data.map(x => x[1]);
+
+  setUpBars(values, labels, max, link);
+}
+
+function setUpBars(values, labels, max, link) {
   let bars;
 
-  if (links) {
+  if (link) {
     bars = d3.select(".visualization")
       .selectAll("div")
       .data(labels)
       .enter()
       .append("a")
-      .attr("href", labels => "/genreGrossPerMonth/" + encodeURIComponent(labels))
+      .attr("href", labels => `/${link}/` + encodeURIComponent(labels))
       .append("div")
       .classed("bar-container", true);
   } else {
@@ -76,4 +88,26 @@ function setUpBars(values, labels, max, links) {
     .style("width", values => values / max * 1000 + "px");
 }
 
-export {clear, drawBars, drawCalendarBars};
+function setUpNarrowBars(values, labels, max, link) {
+  let bars = d3.select(".visualization")
+      .selectAll("div")
+      .data(labels)
+      .enter()
+      .append("div")
+      .classed("narrow-bar-container", true);
+
+  // bars.data(labels).append("span").text(labels => labels);
+  bars.data(labels).append("div")
+    .classed("narrow-bar-style", true)
+    .append("span").text((labels) => labels);
+
+  // bars.data(values).append("span")
+    // .classed("bar-value", true)
+    // .text(d => "$ " + numeral(d).format("0,0"));
+
+  d3.selectAll("div.narrow-bar-style").data(values).transition()
+    .duration(500)
+    .style("width", values => values / max * 1000 + "px");
+}
+
+export {clear, drawBars, drawCalendarBars, drawNarrowBars};

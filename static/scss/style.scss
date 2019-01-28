@@ -2,7 +2,6 @@
 @import 'landing';
 
 .content-wrapper {
-  height: 100%;
 
   display: flex;
   justify-content: space-around;
@@ -44,7 +43,32 @@
   tex-align: right;
 }
 
-.bar-container {
+.narrow-bar-style {
+  background-color: #8facf3;
+  box-sizing: border-box;
+  display: inline-block;
+  color: white;
+  font-weight: bold;
+  tex-align: right;
+  height: 100%;
+}
+
+.narrow-bar-container {
+  height: 3px;
+
+  transition: 0.25s;
+
+  &:hover {
+    height: 30px;
+
+    div {
+      background-color: #82c3ce;
+      cursor: pointer;
+    }
+  }
+}
+
+.bar-container, .narrow-bar-container {
   display: flex;
   align-content: center;
   flex-direction: row;
