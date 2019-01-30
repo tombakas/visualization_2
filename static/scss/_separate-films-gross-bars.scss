@@ -1,0 +1,48 @@
+.separate-films-gross-bars {
+  .bar-style {
+    background-color: $bar-background;
+    box-sizing: border-box;
+    display: inline-block;
+    height: 3px;
+    padding: 2px;
+    color: white;
+    font-weight: bold;
+    margin: 2px;
+    tex-align: right;
+  }
+
+  .bar-container {
+    display: flex;
+    align-content: center;
+    flex-direction: row;
+    align-items: center;
+    user-select: none;
+    -moz-user-select: none;
+    span {
+      width: 300px;
+      text-align: right;
+      padding-right:
+      1px;
+      display: none;
+    }
+
+    .bar-value {
+      text-align: left;
+      width: auto;
+      padding-left: 10px;
+    }
+    &:hover {
+      font-weight: bold;
+      span {
+        display: block;
+        float:left;
+      }
+      & .bar-style {
+        font-weight: bold;
+        height: 20px;
+        background-color: $bar-hover;
+        cursor: pointer;
+      }
+    }
+  }
+}

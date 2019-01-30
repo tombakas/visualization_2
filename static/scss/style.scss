@@ -1,5 +1,8 @@
+@import 'vars';
 @import 'reset';
 @import 'landing';
+@import 'genre-gross-bars';
+@import 'separate-films-gross-bars';
 
 .content-wrapper {
   height: 100%;
@@ -29,70 +32,4 @@
 
 .visOption {
   cursor: pointer;
-}
-
-.bar-style {
-  background-color: #8facf3;
-  box-sizing: border-box;
-  display: inline-block;
-  height: 30px;
-  padding: 2px;
-  color: white;
-  font-weight: bold;
-  margin: 2px;
-  tex-align: right;
-}
-
-.narrow-bar-style {
-  background-color: #8facf3;
-  box-sizing: border-box;
-  display: inline-block;
-  color: white;
-  font-weight: bold;
-  tex-align: right;
-  height: 100%;
-}
-
-.narrow-bar-container {
-  height: 3px;
-
-  transition: 0.25s;
-
-  &:hover {
-    height: 30px;
-
-    div {
-      background-color: #82c3ce;
-      cursor: pointer;
-    }
-  }
-}
-
-.bar-container, .narrow-bar-container {
-  display: flex;
-  align-content: center;
-  flex-direction: row;
-  align-items: center;
-  user-select: none;
-  -moz-user-select: none;
-  span {
-    width: 160px;
-    text-align: right;
-    padding-right:
-    1px;
-  }
-
-  .bar-value {
-    text-align: left;
-    width: auto;
-    padding-left: 10px;
-  }
-  &:hover {
-    font-weight: bold;
-    & .bar-style {
-      font-weight: bold;
-      background-color: #82c3ce;
-      cursor: pointer;
-    }
-  }
 }
