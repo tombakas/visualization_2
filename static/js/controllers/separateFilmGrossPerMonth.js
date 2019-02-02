@@ -22,8 +22,6 @@ window.onload = function() {
 
     d3.select(".y-axis").append("span").text("$" + numeral(max).format("0,0"));
 
-    console.log(data);
-
     bars = d3.select(".visualization").selectAll("div")
       .data(sortedData)
       .enter()

@@ -5,7 +5,6 @@ window.onload = function() {
   let u = window.location.pathname.split("/");
   let url = "/api/genreGrossPerMonth/" + u[u.length - 2];
   $.getJSON( url, function( data ) {
-    console.log(data)
     drawing.clear();
     drawBars(data, 0, 1, 0, 1, true, "separateFilmGrossPerMonth");
   });

@@ -1,0 +1,6 @@
+.gridContainer {
+    width: 300px;
+    height: 300px;
+
+    backgroud-color: red;
+}

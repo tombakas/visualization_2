@@ -75,16 +75,67 @@ def APIgrossPerGenre():
 
 @routes.route("/api/genreGrossPerMonth/<path:genre>/")
 def APIgenreGrossPerMonth(genre):
-    print(genre)
     query = """
         SELECT strftime("%m", "Release Date"), SUM("Domestic Gross"),SUM("Worldwide Gross"),"genre"
-        FROM movies WHERE genre=?
+        FROM movies
+        WHERE genre=?
         GROUP BY strftime("%m","Release Date")
     """
     genre = unquote(genre)
     result = query_db(
         query, (genre,)
     )
+
+    return Response(dumps(result), mimetype="application/json")
+
+
+@routes.route("/genreAllMonths/<path:genre>/")
+def genreAllMonths(genre):
+    return render_template("genre_all_months.html")
+
+
+@routes.route("/api/genreAllMonths/<path:genre>/")
+def APIgenreAllMonths(genre):
+
+    def get_one_month(month):
+        sql_script = """
+            DROP VIEW IF EXISTS allMonths_q1;
+            CREATE VIEW allMonths_q1 AS
+            SELECT "Release Date", "Production Budget", "Domestic Gross","Worldwide Gross","genre"
+            FROM movies
+            WHERE genre="{0}" AND "Release Date" LIKE "%-{1}-%"
+            ORDER BY "Worldwide Gross" DESC
+            LIMIT 50;
+
+            DROP VIEW IF EXISTS allMonths_q2;
+            CREATE VIEW allMonths_q2 AS
+            SELECT "Release Date", "Production Budget", "Domestic Gross","Worldwide Gross","genre"
+            FROM movies
+            WHERE genre="{0}" AND "Release Date" LIKE "%-{1}-%"
+            ORDER BY "Domestic Gross" DESC
+            LIMIT 50;
+        """
+
+        cur = get_db().executescript(
+            sql_script.format(genre, month)
+        )
+        cur.close()
+
+        query = """
+            SELECT *
+            FROM allMonths_q1
+            UNION
+            SELECT *
+            FROM allMonths_q2
+        """
+        result = query_db(query)
+        return result
+
+    genre = unquote(genre)
+    result = {}
+
+    for month in range(1, 13):
+        result[month] = get_one_month("{:02d}".format(month))
 
     return Response(dumps(result), mimetype="application/json")
 

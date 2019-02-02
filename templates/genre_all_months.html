@@ -1,0 +1,19 @@
+{% extends "visualization_base.html" %}
+
+{% block stylesheets %}
+  <link rel="stylesheet" href="/static/css/genre_all_months_sep.css">
+{% endblock %}
+
+{% block visualization %}
+  <div class="visualization">
+  </div>
+{% endblock %}
+
+{% block extra %}
+  {% include "home.html" %}
+{% endblock %}
+
+{% block local_scripts %}
+  <script src="/static/js/controllers/genreAllMonths.js" type="module">
+  </script>
+{% endblock %}
