@@ -15,6 +15,8 @@ window.onload = function() {
         return Number(a[valueColumn]) < Number(b[valueColumn])
     });
 
+    console.log(sortedData);
+
     let values =  sortedData.map(x => x[valueColumn]);
     let labels =  sortedData.map(x => x[labelColumn]);
 
@@ -50,6 +52,9 @@ window.onload = function() {
 
     filmInfo.append("div").text(sortedData => "Worldwide Gross: $ " + numeral(sortedData[3]).format("0,0"))
       .classed("worldwide-gross", true);
+
+    filmInfo.append("div").text(sortedData => "Release Date: " + sortedData[4])
+      .classed("release-date", true);
 
     // bars.data(values).append("span")
     // .classed("bar-value", true)
