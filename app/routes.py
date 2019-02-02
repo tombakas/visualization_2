@@ -106,14 +106,14 @@ def APIseperateFilmGrossPerMonth(month, genre=None):
         SELECT "movie_title", "Production Budget","Domestic Gross","Worldwide Gross","index"
         FROM movies WHERE "Release Date" LIKE "%-{0:02d}-%" {1}
         ORDER BY "Worldwide Gross" DESC
-        LIMIT 100;
+        LIMIT 70;
 
         DROP VIEW IF EXISTS q2;
         CREATE VIEW q2 AS
         SELECT "movie_title", "Production Budget","Domestic Gross","Worldwide Gross","index"
         FROM movies WHERE "Release Date" LIKE "%-{0:02d}-%" {1}
         ORDER BY "Domestic Gross" DESC
-        LIMIT 100;
+        LIMIT 70;
     """
 
     cur = get_db().executescript(

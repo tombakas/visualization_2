@@ -42,3 +42,20 @@
 .visOption {
   cursor: pointer;
 }
+
+.home {
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 50px;
+    width: 50px;
+    padding-left: 10px;
+    padding-top: 10px;
+
+    opacity: 0.05;
+    transition: 0.4s;
+
+    &:hover {
+        opacity: 0.3;
+    }
+}

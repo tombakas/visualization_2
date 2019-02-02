@@ -5,6 +5,10 @@
   </div>
 {% endblock %}
 
+{% block extra %}
+  {% include "home.html" %}
+{% endblock %}
+
 {% block local_scripts %}
   <script src="/static/js/controllers/grossPerGenre.js" type="module">
   </script>
