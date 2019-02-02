@@ -15,8 +15,6 @@ window.onload = function() {
         return Number(a[valueColumn]) < Number(b[valueColumn])
     });
 
-    console.log(sortedData);
-
     let values =  sortedData.map(x => x[valueColumn]);
     let labels =  sortedData.map(x => x[labelColumn]);
 
