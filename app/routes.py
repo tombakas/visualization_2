@@ -23,7 +23,7 @@ def grossPerGenre():
 
 @routes.route("/genreGrossPerMonth/<path:genre>/")
 def genreGrossPerMonth(genre):
-    return render_template("genre_gross_per_month.html")
+    return render_template("genre_gross_per_month.html", genre=genre)
 
 
 @routes.route("/separateFilmGrossPerMonth/<month>/<path:genre>/")

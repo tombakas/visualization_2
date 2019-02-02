@@ -7,6 +7,11 @@
 
 {% block extra %}
   {% include "home.html" %}
+  <div class="link-to-yearly-breakdown">
+    <a href="/genreAllMonths/{{ genre }}">
+      <button class="uk-button uk-button-default">Link to Yearly Breakdown</button>
+    </a>
+  </div>
 {% endblock %}
 
 {% block local_scripts %}
