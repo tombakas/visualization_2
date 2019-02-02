@@ -22,36 +22,40 @@ window.onload = function() {
 
     d3.select(".y-axis").append("span").text("$" + numeral(max).format("0,0"));
 
+    console.log(data);
+
     bars = d3.select(".visualization").selectAll("div")
-      .data(labels)
+      .data(sortedData)
       .enter()
+      .append("a")
+      .attr("href", sortedData => "/film/" + encodeURIComponent(sortedData[4]))
       .append("div")
       .classed("bar-container", true);
 
     // bars.data(labels).append("span").text(labels => labels);
     bars.data(labels).append("div")
       .classed("bar-style", true)
-    
+
     let filmInfo = bars.data(data)
-    .append("div")
-    .classed("film-info", true);
+      .append("div")
+      .classed("film-info", true);
 
     filmInfo.append("div").text(data => data[0])
-    .classed("title", true);
+      .classed("title", true);
 
     filmInfo.append("div")
-    .classed("budget", true)
-    .insert("span").text(data => "Budget: $ " + numeral(data[1]).format("0,0"))
+      .classed("budget", true)
+      .insert("span").text(data => "Budget: $ " + numeral(data[1]).format("0,0"))
 
     filmInfo.append("div").text(data => "Domestic Gross: $ " + numeral(data[2]).format("0,0"))
-    .classed("domestic-gross", true);
+      .classed("domestic-gross", true);
 
     filmInfo.append("div").text(data => "Worldwide Gross: $ " + numeral(data[3]).format("0,0"))
-    .classed("worldwide-gross", true);
+      .classed("worldwide-gross", true);
 
     // bars.data(values).append("span")
-      // .classed("bar-value", true)
-      // .text(d => "$ " + numeral(d).format("0,0"));
+    // .classed("bar-value", true)
+    // .text(d => "$ " + numeral(d).format("0,0"));
 
     d3.selectAll("div.bar-style").data(values).transition()
       .duration(500)

@@ -33,6 +33,24 @@ def seperateFilmGrossPerMonth(month, genre=""):
     return render_template("separate_film_gross_per_month.html", title=title)
 
 
+@routes.route("/film/<film_index>")
+def filmPage(film_index=""):
+    film_info = APIfilmPage(film_index).get_json()
+    return render_template("film_page.html", film_info=film_info)
+
+
+@routes.route("/api/film/<film_index>")
+def APIfilmPage(film_index):
+    query = """
+        SELECT movie_title, director_name, "Release Date", "Production Budget", "Domestic Gross", "Worldwide Gross"
+        FROM movies
+        WHERE "index"="{}"
+        """
+    result = query_db(query.format(film_index))
+
+    return Response(dumps(result), mimetype="application/json")
+
+
 @routes.route("/api/grossPerGenre")
 def APIgrossPerGenre():
     result = query_db(
@@ -75,14 +93,14 @@ def APIseperateFilmGrossPerMonth(month, genre=None):
     sql_script = """
         DROP VIEW IF EXISTS q1;
         CREATE VIEW q1 AS
-        SELECT "movie_title", "Production Budget","Domestic Gross","Worldwide Gross"
+        SELECT "movie_title", "Production Budget","Domestic Gross","Worldwide Gross","index"
         FROM movies WHERE "Release Date" LIKE "%-{0:02d}-%" {1}
         ORDER BY "Worldwide Gross" DESC
         LIMIT 100;
 
         DROP VIEW IF EXISTS q2;
         CREATE VIEW q2 AS
-        SELECT "movie_title", "Production Budget","Domestic Gross","Worldwide Gross"
+        SELECT "movie_title", "Production Budget","Domestic Gross","Worldwide Gross","index"
         FROM movies WHERE "Release Date" LIKE "%-{0:02d}-%" {1}
         ORDER BY "Domestic Gross" DESC
         LIMIT 100;

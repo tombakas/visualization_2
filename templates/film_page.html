@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block body %}
+  <div class="film-wrapper">
+    {% for item in film_info %}
+      <p>{{ item }}</p>
+    {% endfor %}
+  </div>
+{% endblock %}
