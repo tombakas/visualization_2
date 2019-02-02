@@ -36,21 +36,21 @@ window.onload = function() {
     bars.data(labels).append("div")
       .classed("bar-style", true)
 
-    let filmInfo = bars.data(data)
+    let filmInfo = bars.data(sortedData)
       .append("div")
       .classed("film-info", true);
 
-    filmInfo.append("div").text(data => data[0])
+    filmInfo.append("div").text(sortedData => sortedData[0])
       .classed("title", true);
 
     filmInfo.append("div")
       .classed("budget", true)
-      .insert("span").text(data => "Budget: $ " + numeral(data[1]).format("0,0"))
+      .insert("span").text(sortedData => "Budget: $ " + numeral(sortedData[1]).format("0,0"))
 
-    filmInfo.append("div").text(data => "Domestic Gross: $ " + numeral(data[2]).format("0,0"))
+    filmInfo.append("div").text(sortedData => "Domestic Gross: $ " + numeral(sortedData[2]).format("0,0"))
       .classed("domestic-gross", true);
 
-    filmInfo.append("div").text(data => "Worldwide Gross: $ " + numeral(data[3]).format("0,0"))
+    filmInfo.append("div").text(sortedData => "Worldwide Gross: $ " + numeral(sortedData[3]).format("0,0"))
       .classed("worldwide-gross", true);
 
     // bars.data(values).append("span")
