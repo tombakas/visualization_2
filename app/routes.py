@@ -16,33 +16,42 @@ def hello():
     return render_template("landing.html")
 
 
-@routes.route("/grossPerGenre")
+@routes.route("/grossPerGenre/")
 def grossPerGenre():
     return render_template("gross_per_genre.html")
 
 
-@routes.route("/genreGrossPerMonth/<path:genre>")
+@routes.route("/genreGrossPerMonth/<path:genre>/")
 def genreGrossPerMonth(genre):
     return render_template("genre_gross_per_month.html")
 
 
-@routes.route("/separateFilmGrossPerMonth/<month>/<path:genre>")
-@routes.route("/separateFilmGrossPerMonth/<month>")
+@routes.route("/separateFilmGrossPerMonth/<month>/<path:genre>/")
+@routes.route("/separateFilmGrossPerMonth/<month>/")
 def seperateFilmGrossPerMonth(month, genre=""):
     title = "Top grossing {} films in {}".format(genre.lower(), month.title())
     return render_template("separate_film_gross_per_month.html", title=title)
 
 
-@routes.route("/film/<film_index>")
+@routes.route("/film/<film_index>/")
 def filmPage(film_index=""):
-    film_info = APIfilmPage(film_index).get_json()
-    return render_template("film_page.html", film_info=film_info)
+    film_keys = ["Director", "Release date", "Budget", "Domestic gross", "Worldwide gross", "Genre"]
+
+    resp = APIfilmPage(film_index).get_json()[0]
+    film_info = resp[1:]
+
+    film_info[2] = "$ {:,}".format(film_info[2])
+    film_info[3] = "$ {:,}".format(film_info[3])
+    film_info[4] = "$ {:,}".format(film_info[4])
+
+    z = zip(film_keys, film_info)
+    return render_template("film_page.html", film_info=z, title=resp[0])
 
 
-@routes.route("/api/film/<film_index>")
+@routes.route("/api/film/<film_index>/")
 def APIfilmPage(film_index):
     query = """
-        SELECT movie_title, director_name, "Release Date", "Production Budget", "Domestic Gross", "Worldwide Gross"
+        SELECT movie_title, director_name, "Release Date", "Production Budget", "Domestic Gross", "Worldwide Gross", genre
         FROM movies
         WHERE "index"="{}"
         """
@@ -51,7 +60,7 @@ def APIfilmPage(film_index):
     return Response(dumps(result), mimetype="application/json")
 
 
-@routes.route("/api/grossPerGenre")
+@routes.route("/api/grossPerGenre/")
 def APIgrossPerGenre():
     result = query_db(
         """
@@ -64,8 +73,9 @@ def APIgrossPerGenre():
     return Response(dumps(result), mimetype="application/json")
 
 
-@routes.route("/api/genreGrossPerMonth/<path:genre>")
+@routes.route("/api/genreGrossPerMonth/<path:genre>/")
 def APIgenreGrossPerMonth(genre):
+    print(genre)
     query = """
         SELECT strftime("%m", "Release Date"), SUM("Domestic Gross"),SUM("Worldwide Gross"),"genre"
         FROM movies WHERE genre=?
@@ -80,7 +90,7 @@ def APIgenreGrossPerMonth(genre):
 
 
 @routes.route("/api/separateFilmGrossPerMonth/<month>/<path:genre>/")
-@routes.route("/api/separateFilmGrossPerMonth/<month>")
+@routes.route("/api/separateFilmGrossPerMonth/<month>/")
 def APIseperateFilmGrossPerMonth(month, genre=None):
     month_number = int(datetime.strptime(month[:3], "%b").month)
 

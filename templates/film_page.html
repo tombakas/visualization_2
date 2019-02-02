@@ -2,8 +2,16 @@
 
 {% block body %}
   <div class="film-wrapper">
-    {% for item in film_info %}
-      <p>{{ item }}</p>
-    {% endfor %}
+    <div class="film-info">
+      <h3>{{ title }}</h3>
+      <table>
+        {% for row in film_info %}
+          <tr>
+            <td class="header">{{ row[0] }}</td>
+            <td class="data">{{ row[1] }}</td>
+          </tr>
+        {% endfor %}
+      </table>
+    </div>
   </div>
 {% endblock %}
