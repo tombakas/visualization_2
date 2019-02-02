@@ -3,7 +3,6 @@ import * as drawing from "/static/js/drawing.js";
 window.onload = function() {
   let urlParts = window.location.pathname.split("/");
   let url = "/api/separateFilmGrossPerMonth/" + urlParts.slice(2).join("/");
-  console.log(url);
 
   $.getJSON( url, function( data ) {
     drawing.clear();
@@ -21,25 +20,41 @@ window.onload = function() {
 
     let bars;
 
-    bars = d3.select(".visualization")
-      .selectAll("div")
+    d3.select(".y-axis").append("span").text("$" + numeral(max).format("0,0"));
+
+    bars = d3.select(".visualization").selectAll("div")
       .data(labels)
       .enter()
       .append("div")
-      .classed("separate-films-gross-bars", true)
-      .append("div")
       .classed("bar-container", true);
 
-    bars.data(labels).append("span").text(labels => labels);
+    // bars.data(labels).append("span").text(labels => labels);
     bars.data(labels).append("div")
       .classed("bar-style", true)
+    
+    let filmInfo = bars.data(data)
+    .append("div")
+    .classed("film-info", true);
 
-    bars.data(values).append("span")
-      .classed("bar-value", true)
-      .text(d => "$ " + numeral(d).format("0,0"));
+    filmInfo.append("div").text(data => data[0])
+    .classed("title", true);
+
+    filmInfo.append("div")
+    .classed("budget", true)
+    .insert("span").text(data => "Budget: $ " + numeral(data[1]).format("0,0"))
+
+    filmInfo.append("div").text(data => "Domestic Gross: $ " + numeral(data[2]).format("0,0"))
+    .classed("domestic-gross", true);
+
+    filmInfo.append("div").text(data => "Worldwide Gross: $ " + numeral(data[3]).format("0,0"))
+    .classed("worldwide-gross", true);
+
+    // bars.data(values).append("span")
+      // .classed("bar-value", true)
+      // .text(d => "$ " + numeral(d).format("0,0"));
 
     d3.selectAll("div.bar-style").data(values).transition()
       .duration(500)
-      .style("width", values => values / max * 500 + "px");
+      .style("height", values => values / max * 100 + "%");
   });
 }

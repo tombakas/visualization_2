@@ -28,8 +28,9 @@ def genreGrossPerMonth(genre):
 
 @routes.route("/separateFilmGrossPerMonth/<month>/<path:genre>")
 @routes.route("/separateFilmGrossPerMonth/<month>")
-def seperateFilmGrossPerMonth(month, genre=None):
-    return render_template("separate_film_gross_per_month.html")
+def seperateFilmGrossPerMonth(month, genre=""):
+    title = "Top grossing {} films in {}".format(genre.lower(), month.title())
+    return render_template("separate_film_gross_per_month.html", title=title)
 
 
 @routes.route("/api/grossPerGenre")
@@ -87,7 +88,6 @@ def APIseperateFilmGrossPerMonth(month, genre=None):
         LIMIT 100;
     """
 
-    print(sql_script.format(month_number, genre_clause))
     cur = get_db().executescript(
         sql_script.format(month_number, genre_clause)
     )
