@@ -78,7 +78,8 @@ window.onload = function() {
       .on("mouseout", function() {
         d3.selectAll(".scatter-dot")
           .style('opacity', '0.3');
-      })
-    ;
+      }) ;
+
+    $(".loader-wrapper").hide();
   });
 };
