@@ -40,7 +40,9 @@ window.onload = function() {
       .attr("class", "scatter-dot")
       .attr("cx", v => x_f(v[1]))
       .attr("cy", v => y_f(Number(v[0])))
-      .attr("r", v => r_f(v[2]));
+      .attr("r", v => r_f(v[2]))
+      .append("svg:title")
+      .text(d => `Year: ${d[0]}, Count: ${d[2]}`);
 
     svg.append('g')
       .attr('class', 'x axis').selectAll("g")
