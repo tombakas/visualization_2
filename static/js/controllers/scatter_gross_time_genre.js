@@ -45,7 +45,7 @@ window.onload = function() {
       .append("svg:title")
       .text(d => {
         let tooltip = "";
-        tooltip += `Title: "${d[3]}\n`;
+        tooltip += `Title: "${d[3]}\n"`;
 
         if (d[4]) {
           tooltip += `Director: ${d[4]} \n`;

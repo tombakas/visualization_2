@@ -30,7 +30,6 @@ def year_genre(film_index=""):
 @scatter_routes.route("/api/scatter/gross-time-genre/<genre>")
 @scatter_routes.route("/api/scatter/gross-time-genre/")
 def APIgross_time_genre(genre=None, year=None):
-    print("genre")
     if year:
         query = """
             SELECT "Release Date", genre, "Worldwide Gross", "movie_title", "director_name", "Production Budget"
