@@ -9,6 +9,8 @@ window.onload = function() {
   let url = "/api/genreAllMonths/" + genre;
 
   $.getJSON( url, function( data ) {
+    $(".loader-wrapper").hide();
+
     let values;
     let labels;
     let max;
