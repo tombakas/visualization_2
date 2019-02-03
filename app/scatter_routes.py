@@ -1,5 +1,4 @@
 from json import dumps
-from collections import defaultdict
 
 from flask import Response
 from flask import Blueprint, render_template

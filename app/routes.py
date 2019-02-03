@@ -23,7 +23,7 @@ def grossPerGenre():
 
 @routes.route("/genreGrossPerMonth/<path:genre>/")
 def genreGrossPerMonth(genre):
-    return render_template("genre_gross_per_month.html", genre=genre)
+    return render_template("genre_gross_per_month.html", genre=genre.lower())
 
 
 @routes.route("/separateFilmGrossPerMonth/<month>/<path:genre>/")
@@ -91,7 +91,7 @@ def APIgenreGrossPerMonth(genre):
 
 @routes.route("/genreAllMonths/<path:genre>/")
 def genreAllMonths(genre):
-    return render_template("genre_all_months.html")
+    return render_template("genre_all_months.html", genre=genre.lower())
 
 
 @routes.route("/api/genreAllMonths/<path:genre>/")
@@ -117,7 +117,7 @@ def APIgenreAllMonths(genre):
         """
 
         cur = get_db().executescript(
-            sql_script.format(genre, month)
+            sql_script.format(genre.title(), month)
         )
         cur.close()
 
@@ -143,7 +143,11 @@ def APIgenreAllMonths(genre):
 @routes.route("/api/separateFilmGrossPerMonth/<month>/<path:genre>/")
 @routes.route("/api/separateFilmGrossPerMonth/<month>/")
 def APIseperateFilmGrossPerMonth(month, genre=None):
+    if genre:
+        genre = genre.title()
+
     month_number = int(datetime.strptime(month[:3], "%b").month)
+    print(month_number)
 
     if genre is not None:
         genre = unquote(genre)
