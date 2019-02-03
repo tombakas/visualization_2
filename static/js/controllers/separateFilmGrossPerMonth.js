@@ -54,6 +54,9 @@ window.onload = function() {
     filmInfo.append("div").text(sortedData => "Release Date: " + sortedData[4])
       .classed("release-date", true);
 
+    filmInfo.append("div").text(sortedData => "Direcor: " + sortedData[6]);
+    filmInfo.append("div").text(sortedData => "Lead actor: " + sortedData[7]);
+
     // bars.data(values).append("span")
     // .classed("bar-value", true)
     // .text(d => "$ " + numeral(d).format("0,0"));
