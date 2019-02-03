@@ -4,6 +4,7 @@ window.onload = function() {
   let url = "/api/scatter/year-genre/"
 
   $.getJSON( url, function( data ) {
+    $(".loader-wrapper").hide();
     let genres = data["genres"]
 
     drawing.clear();

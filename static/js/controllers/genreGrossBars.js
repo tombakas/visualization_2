@@ -34,7 +34,7 @@ function bars(values, labels, max, link) {
     .append("div")
     .classed("genre-gross-bars", true)
     .append("a")
-    .attr("href", labels => `/${link}/` + encodeURIComponent(labels))
+    .attr("href", l => `/${link}/${encodeURIComponent(l)}`)
     .append("div")
     .classed("bar-container", true);
 
