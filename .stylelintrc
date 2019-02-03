@@ -1,0 +1,3 @@
+{
+  "extends": "/home/tomas/.npm-packages/lib/node_modules/stylelint-config-recommended-scss"
+}

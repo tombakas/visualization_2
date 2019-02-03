@@ -1,5 +1,10 @@
 @import "vars";
 
+.svg-bar {
+  fill: $bar-background;
+  transition: 0.4s;
+}
+
 .visualization {
   height: 100%;
 
@@ -28,9 +33,4 @@
       }
     }
   }
-}
-
-.svg-bar {
-  fill: $bar-background;
-  transition: 0.4s;
 }

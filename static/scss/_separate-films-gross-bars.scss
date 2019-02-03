@@ -29,14 +29,6 @@
   }
 
   .visualization {
-    a:hover {
-      &:hover .bar-style {
-        background-color: $bar-hover;
-        cursor: pointer;
-      }
-
-    }
-
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -54,7 +46,7 @@
       color: white;
       font-weight: bold;
       margin: 2px;
-      tex-align: right;
+      text-align: right;
       align-self: flex-end;
     }
 
@@ -72,6 +64,14 @@
           font-weight: bold;
           padding-bottom: 20px;
         }
+      }
+
+      a:hover {
+        &:hover .bar-style {
+          background-color: $bar-hover;
+          cursor: pointer;
+        }
+
       }
 
       &:hover {

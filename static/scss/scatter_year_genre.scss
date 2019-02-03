@@ -23,14 +23,13 @@ $dot-color: #3f79a7;
 
     fill: black;
     transition: 0.3s;
-  }
 
-  &:hover {
     -webkit-transition:.3s;
     transform: scale(1.2);
     transform-origin: 50% 50%;
     transform-box: fill-box;
   }
+
 }
 
 .tooltip {
