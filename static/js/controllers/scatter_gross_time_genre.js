@@ -1,8 +1,6 @@
 window.onload = function() {
   let url = "/api" + window.location.pathname;
 
-  console.log(url);
-
   $.getJSON( url, function( data ) {
 
     let maxYear = d3.max(data, d => d[0]);
@@ -67,7 +65,6 @@ window.onload = function() {
     d3.selectAll(".legend .genre")
       .on("mouseover", function(o) {
         let genre = this.className.split(" ")[1];
-        console.log(genre);
 
         d3.selectAll(".scatter-dot")
           .style('opacity', '0');

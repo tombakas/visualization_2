@@ -147,7 +147,6 @@ def APIseperateFilmGrossPerMonth(month, genre=None):
         genre = genre.title()
 
     month_number = int(datetime.strptime(month[:3], "%b").month)
-    print(month_number)
 
     if genre is not None:
         genre = unquote(genre)
