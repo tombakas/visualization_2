@@ -58,3 +58,10 @@ $dot-color: #3f79a7;
 .tooltip:hover .tooltiptext {
   visibility: visible;
 }
+
+.y-axis {
+  text {
+    fill: $dot-color;
+    font-weight: bold;
+  }
+}
