@@ -1,0 +1,31 @@
+.scatter-dot {
+  opacity: 0.3;
+
+  &.action {
+    fill: red;
+  }
+
+  &.documentary {
+    fill: green;
+  }
+
+  &.drama {
+    fill: blue;
+  }
+
+  &.musical {
+    fill: yellow;
+  }
+
+  &.thriller {
+    fill: cyan;
+  }
+
+  &.horror {
+    fill: magenta;
+  }
+
+  &.adventure {
+    fill: orange;
+  }
+}

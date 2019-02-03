@@ -1,0 +1,21 @@
+{% extends "visualization_base.html" %}
+
+{% block stylesheets %}
+  <link rel="stylesheet" href="/static/css/scatter-gross-time-genre.css">
+{% endblock %}
+
+{% block visualization %}
+  <div class="page-title">
+    <div>
+      Gross over time for all genres
+      <hr>
+    </div>
+  </div>
+  <div class="visualization">
+  </div>
+{% endblock %}
+
+{% block local_scripts %}
+  <script src="/static/js/controllers/scatter_gross_time_genre.js" type="module">
+  </script>
+{% endblock %}

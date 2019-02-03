@@ -9,13 +9,30 @@ scatter_routes = Blueprint('scatter_routes', __name__,
                            template_folder='templates')
 
 
+@scatter_routes.route("/scatter/gross-time-genre/")
+def gross_time_genre(film_index=""):
+    return render_template("scatter_gross_time_genre.html")
+
+
 @scatter_routes.route("/scatter/year-genre/")
-def filmPage(film_index=""):
-    return render_template("scatter-year-genre.html")
+def year_genre(film_index=""):
+    return render_template("scatter_year_genre.html")
+
+
+@scatter_routes.route("/api/scatter/gross-time-genre/")
+def APIgross_time_genre(film_index=""):
+    query = """
+        SELECT "Release Date", genre, "Worldwide Gross"
+        FROM movies
+        WHERE "Worldwide Gross" > 0
+    """
+
+    result = query_db(query)
+    return Response(dumps(result), mimetype="application/json")
 
 
 @scatter_routes.route("/api/scatter/year-genre/")
-def APIfilmPage():
+def APIyear_genre():
     query = """
         SELECT strftime("%Y", "Release Date") AS YEAR, genre, count(genre)
         FROM movies
