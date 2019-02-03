@@ -1,0 +1,18 @@
+{% extends "visualization_base.html" %}
+
+{% block visualization %}
+  <div class="visualization">
+  </div>
+{% endblock %}
+
+{% block stylesheets %}
+  <link rel="stylesheet" href="/static/css/scatter_year_genre.css">
+{% endblock %}
+
+{% block extra %}
+  {% include "home.html" %}
+{% endblock %}
+
+{% block local_scripts %}
+  <script src="/static/js/controllers/scatter-year-genre.js" type="module"></script>
+{% endblock %}

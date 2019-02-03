@@ -5,9 +5,11 @@ from flask import Flask
 from flask import g
 
 from app.routes import routes
+from app.scatter_routes import scatter_routes
 
 app = Flask(__name__)
 app.register_blueprint(routes)
+app.register_blueprint(scatter_routes)
 
 
 @app.teardown_appcontext
