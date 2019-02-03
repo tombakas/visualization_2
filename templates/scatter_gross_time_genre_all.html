@@ -10,7 +10,11 @@
       {% if genre %}
         Gross over time for {{ genre }}
       {% else %}
-        Gross over time for all genres
+        {% if year %}
+          Gross over time for all genres in {{ year }}
+        {% else %}
+          Gross over time for all genres
+        {% endif %}
       {% endif %}
       <hr>
     </div>

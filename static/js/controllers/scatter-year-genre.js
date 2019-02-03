@@ -38,6 +38,8 @@ window.onload = function() {
     svg.append("g").selectAll(".circ")
       .data(data["data"])
       .enter()
+      .append("a")
+      .attr("href", (d) => "/scatter/gross-time-genre/year/" + d[0])
       .append("circle")
       .attr("class", "scatter-dot")
       .attr("cx", v => x_f(v[1]))

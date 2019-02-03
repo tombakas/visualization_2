@@ -1,6 +1,8 @@
 window.onload = function() {
   let url = "/api" + window.location.pathname;
 
+  console.log(url);
+
   $.getJSON( url, function( data ) {
 
     let maxYear = d3.max(data, d => d[0]);
