@@ -33,14 +33,14 @@ def APIgross_time_genre(genre=None, year=None):
     print("genre")
     if year:
         query = """
-            SELECT "Release Date", genre, "Worldwide Gross", "movie_title"
+            SELECT "Release Date", genre, "Worldwide Gross", "movie_title", "director_name", "Production Budget"
             FROM movies
             WHERE "Release Date" LIKE "{}-%"
             """
         query = query.format(year)
     else:
         query = """
-            SELECT "Release Date", genre, "Worldwide Gross", "movie_title"
+            SELECT "Release Date", genre, "Worldwide Gross", "movie_title", "director_name", "Production Budget"
             FROM movies
             WHERE "Worldwide Gross" > 40000000 {}
         """

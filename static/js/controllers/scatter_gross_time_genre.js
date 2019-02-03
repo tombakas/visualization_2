@@ -43,7 +43,7 @@ window.onload = function() {
       .attr("cy", v => y_f(v[2]))
       .attr("r", v => r_f(v[2]))
       .append("svg:title")
-      .text(d => `Year: ${d[0]}, Gross: $${d[2]}, Title: "${d[3]}"`);
+      .text(d => `Title: "${d[3]}"\nDirector: ${d[4]} \nYear: ${d[0].split("-")[0]} \nGross: $${numeral(d[2]).format("0,0")}\nBudget: $${numeral(d[5]).format("0,0")}`);
 
     let xAxis = d3.axisBottom(x_f)
       .ticks(20);
