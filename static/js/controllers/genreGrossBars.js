@@ -1,9 +1,9 @@
 import { months } from "/static/js/vars.js";
 import { getMax } from "/static/js/drawing.js";
 
-function drawBars(data, labelColumn, valueColumn, sortColumn, maxColumn, reverse, link) {
+function drawBars(data, labelColumn, valueColumn, sortColumn, maxColumn, reverse, link, modlink) {
   // data strucure: | Genre | Domestic Gross | Worldwide Gross |
-
+  console.log(data);
   let sortedData = data.sort((a, b) => {
     if (reverse) {
       return Number(a[sortColumn]) > Number(b[sortColumn])
@@ -24,6 +24,16 @@ function drawBars(data, labelColumn, valueColumn, sortColumn, maxColumn, reverse
   });
 
   bars(values, labels, max, link);
+  if (modlink){
+    addGenreToLink(data, link);
+  }
+}
+
+function addGenreToLink(data, link) {
+  let bars = d3.selectAll(".genre-gross-bars a")
+    .data(data)
+    .attr("href", l => "/" + link + "/" + months[Number(l[0])] + "/" + l[3]);
+  console.log(bars);
 }
 
 function bars(values, labels, max, link) {

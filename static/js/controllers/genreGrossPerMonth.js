@@ -6,6 +6,6 @@ window.onload = function() {
   let url = "/api/genreGrossPerMonth/" + u[u.length - 2];
   $.getJSON( url, function( data ) {
     drawing.clear();
-    drawBars(data, 0, 1, 0, 1, true, "separateFilmGrossPerMonth");
+    drawBars(data, 0, 1, 0, 1, true, "separateFilmGrossPerMonth", true);
   });
 }

@@ -30,7 +30,7 @@ def genreGrossPerMonth(genre):
 @routes.route("/separateFilmGrossPerMonth/<month>/")
 def seperateFilmGrossPerMonth(month, genre=""):
     title = "Top grossing {} films in {}".format(genre.lower(), month.title())
-    return render_template("separate_film_gross_per_month.html", title=title)
+    return render_template("separate_film_gross_per_month.html", title=title, genre=genre, month=month)
 
 
 @routes.route("/film/<film_index>/")

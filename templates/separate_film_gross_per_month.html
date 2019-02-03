@@ -23,6 +23,13 @@
 
 {% block extra %}
   {% include "home.html" %}
+  {% if genre %}
+    <div class="link-to-all-films">
+      <a href="/separateFilmGrossPerMonth/{{ month }}">
+        <button class="uk-button uk-button-default">All top grossing in {{ month }}</button>
+      </a>
+    </div>
+  {% endif %}
 {% endblock %}
 
 {% block local_scripts %}
