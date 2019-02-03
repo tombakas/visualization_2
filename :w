@@ -1,7 +1,0 @@
-.x-text {
-  font-size: 14px;
-}
-
-.scatter-dot {
-  opacity: 0.4;
-}
