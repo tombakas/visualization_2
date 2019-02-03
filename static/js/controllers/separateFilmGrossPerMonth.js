@@ -26,7 +26,7 @@ window.onload = function() {
       .data(sortedData)
       .enter()
       .append("a")
-      .attr("href", sortedData => "/film/" + encodeURIComponent(sortedData[4]))
+      .attr("href", sortedData => "/film/" + encodeURIComponent(sortedData[5]))
       .append("div")
       .classed("bar-container", true);
 

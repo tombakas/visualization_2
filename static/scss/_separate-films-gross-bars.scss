@@ -25,6 +25,14 @@
   }
 
   .visualization {
+    a:hover {
+      &:hover .bar-style {
+        background-color: $bar-hover;
+        cursor: pointer;
+      }
+
+    }
+
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -53,11 +61,6 @@
       display: flex;
       flex-direction: row;
 
-      &:hover .bar-style {
-        background-color: $bar-hover;
-        cursor: pointer;
-      }
-
       .film-info {
         display: none;
 
@@ -73,7 +76,7 @@
           display: block;
           position: fixed;
           width: 400px;
-          height: 400px;
+          height: 120;
           margin-left: -200px;
           left: 50%;
           top: 20%;
