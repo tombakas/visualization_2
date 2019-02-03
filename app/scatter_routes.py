@@ -30,6 +30,7 @@ def year_genre(film_index=""):
 @scatter_routes.route("/api/scatter/gross-time-genre/<genre>")
 @scatter_routes.route("/api/scatter/gross-time-genre/")
 def APIgross_time_genre(genre=None, year=None):
+    print("genre")
     if year:
         query = """
             SELECT "Release Date", genre, "Worldwide Gross", "movie_title"
@@ -44,6 +45,10 @@ def APIgross_time_genre(genre=None, year=None):
             WHERE "Worldwide Gross" > 40000000 {}
         """
         if genre:
+            if genre.lower() == "thriller":
+                genre = "Thriller/Suspense"
+            elif genre.lower() == "concert":
+                genre = "Concert/Performance"
             query = query.format("AND \"genre\"=\"{}\"".format(genre.title()))
         else:
             query = query.format("")
