@@ -21,20 +21,6 @@
 
 {% block extra %}
   {% include "home.html" %}
-
-  <div class="legend">
-    {% for genre in genres %}
-      <a href="/scatter/gross-time-genre/{{ genre[1] }}">
-        <div class="genre {{ genre[1] }}">
-          <svg width="16" height="16">
-            <circle cx="8" cy="8" r="8" fill="red"></circle>
-          </svg>
-          <span>{{ genre[0] }}</span>
-        </div>
-      </a>
-    {% endfor %}
-  </div>
-
 {% endblock %}
 
 {% block local_scripts %}

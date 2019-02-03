@@ -1,31 +1,106 @@
+$color-action: red;
+$color-adventure: #fd6700;
+$color-comedy: navy;
+$color-concert: pink;
+$color-documentary: green;
+$color-drama: blue;
+$color-horror: magenta;
+$color-musical: #fad134;
+$color-thriller: cyan;
+$color-western: brown;
+
+@mixin colored-circle($color) {
+  svg circle {
+    fill: $color;
+  }
+}
+
 .scatter-dot {
   opacity: 0.3;
+  transition: 0.3s;
+
+  &:hover {
+    opacity: 0.5;
+    cursor: pointer;
+  }
 
   &.action {
-    fill: red;
+    fill: $color-action;
   }
 
   &.documentary {
-    fill: green;
+    fill: $color-documentary;
   }
 
   &.drama {
-    fill: blue;
+    fill: $color-drama;
   }
 
   &.musical {
-    fill: yellow;
+    fill: $color-musical;
   }
 
   &.thriller {
-    fill: cyan;
+    fill: $color-thriller;
   }
 
   &.horror {
-    fill: magenta;
+    fill: $color-horror;
   }
 
   &.adventure {
-    fill: orange;
+    fill: $color-adventure;
+  }
+
+  &.western {
+    fill: $color-western;
+  }
+  &.comedy {
+    fill: $color-comedy;
+  }
+}
+
+.legend {
+  position: fixed;
+  right: 50px;
+  top: 30%;
+
+  .genre {
+    transition: .3s;
+    &:hover {
+      cursor: pointer;
+      background-color: #e2f1f9;
+    }
+  }
+
+  .action {
+    @include colored-circle($color-action);
+  }
+  .adventure {
+    @include colored-circle($color-adventure);
+  }
+  .comedy {
+    @include colored-circle($color-comedy);
+  }
+  .concert {
+    @include colored-circle($color-concert);
+  }
+  .documentary {
+    @include colored-circle($color-documentary);
+  }
+  .drama {
+    @include colored-circle($color-drama);
+  }
+  .horror {
+    @include colored-circle($color-horror);
+  }
+  .musical {
+    @include colored-circle($color-musical);
+  }
+  .thriller {
+    @include colored-circle($color-thriller);
+  }
+  .western {
+    @include colored-circle($color-western);
   }
 }

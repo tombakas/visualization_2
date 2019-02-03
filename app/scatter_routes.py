@@ -5,13 +5,19 @@ from flask import Blueprint, render_template
 
 from .db import query_db
 
+from .variables import genres as GENRES
+
 scatter_routes = Blueprint('scatter_routes', __name__,
                            template_folder='templates')
 
 
+@scatter_routes.route("/scatter/gross-time-genre/<genre>")
 @scatter_routes.route("/scatter/gross-time-genre/")
-def gross_time_genre(film_index=""):
-    return render_template("scatter_gross_time_genre.html")
+def gross_time_genre(genre=""):
+    if genre:
+        return render_template("scatter_gross_time_genre_one.html", genre=genre, genres=GENRES)
+    else:
+        return render_template("scatter_gross_time_genre_all.html", genre=genre, genres=GENRES)
 
 
 @scatter_routes.route("/scatter/year-genre/")
@@ -19,13 +25,18 @@ def year_genre(film_index=""):
     return render_template("scatter_year_genre.html")
 
 
+@scatter_routes.route("/api/scatter/gross-time-genre/<genre>")
 @scatter_routes.route("/api/scatter/gross-time-genre/")
-def APIgross_time_genre(film_index=""):
+def APIgross_time_genre(genre=None):
     query = """
-        SELECT "Release Date", genre, "Worldwide Gross"
+        SELECT "Release Date", genre, "Worldwide Gross", "movie_title"
         FROM movies
-        WHERE "Worldwide Gross" > 0
+        WHERE "Worldwide Gross" > 40000000 {}
     """
+    if genre:
+        query = query.format("AND \"genre\"=\"{}\"".format(genre.title()))
+    else:
+        query = query.format("")
 
     result = query_db(query)
     return Response(dumps(result), mimetype="application/json")
