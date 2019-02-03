@@ -23,8 +23,8 @@ window.onload = function() {
     .range([2, 24]);
 
     var xAxis = d3.axisLeft(y_f)
-      .tickFormat(d3.format("d"));
-    ;
+      .tickFormat(d3.format("d"))
+      .ticks(20);
 
     let parent = d3.select(".visualization")
       .append("div")
