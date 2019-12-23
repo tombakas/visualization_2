@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+import sass
+
 from flask import Flask
 from flask import g
 
@@ -20,4 +22,9 @@ def close_connection(exception):
 
 
 if __name__ == "__main__":
+    sass.compile(
+        dirname=("./static/scss", "./static/css"),
+        output_style="compressed"
+    )
+
     app.run()
